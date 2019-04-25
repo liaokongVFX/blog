@@ -10,7 +10,7 @@ from flask_login import UserMixin
 from extensions import db
 
 
-class Admin(db.Model, UserMixin):
+class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
@@ -41,7 +41,7 @@ class Post(db.Model):
 
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
     category = db.relationship("Category", back_populates="posts")
-    comments = db.relationship("Comment", backref="post", cascade="all")
+    comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
 
 
 class Comment(db.Model):

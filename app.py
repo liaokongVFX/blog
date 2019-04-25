@@ -4,6 +4,7 @@
 
 
 from flask import Flask
+
 from settings import config
 
 from blueprints.auth import auth_bp
